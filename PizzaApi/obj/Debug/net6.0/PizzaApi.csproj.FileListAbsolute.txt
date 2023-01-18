@@ -30,3 +30,10 @@ D:\KPI\PizzaApi\PizzaApi\obj\Debug\net6.0\refint\PizzaApi.dll
 D:\KPI\PizzaApi\PizzaApi\obj\Debug\net6.0\PizzaApi.pdb
 D:\KPI\PizzaApi\PizzaApi\obj\Debug\net6.0\PizzaApi.genruntimeconfig.cache
 D:\KPI\PizzaApi\PizzaApi\obj\Debug\net6.0\ref\PizzaApi.dll
+D:\Visual\PizzaWebApi\PizzaApi\obj\Debug\net6.0\PizzaApi.csproj.AssemblyReference.cache
+D:\Visual\PizzaWebApi\PizzaApi\obj\Debug\net6.0\PizzaApi.GeneratedMSBuildEditorConfig.editorconfig
+D:\Visual\PizzaWebApi\PizzaApi\obj\Debug\net6.0\PizzaApi.AssemblyInfoInputs.cache
+D:\Visual\PizzaWebApi\PizzaApi\obj\Debug\net6.0\PizzaApi.AssemblyInfo.cs
+D:\Visual\PizzaWebApi\PizzaApi\obj\Debug\net6.0\PizzaApi.csproj.CoreCompileInputs.cache
+D:\Visual\PizzaWebApi\PizzaApi\obj\Debug\net6.0\PizzaApi.MvcApplicationPartsAssemblyInfo.cs
+D:\Visual\PizzaWebApi\PizzaApi\obj\Debug\net6.0\PizzaApi.MvcApplicationPartsAssemblyInfo.cache

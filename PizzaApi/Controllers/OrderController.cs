@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PizzaApi.Models;
+using DataBaseFunc.Models;
 using System.Xml.Linq;
 using System.Threading.Tasks;
 using System;
+using PizzaApi.Controllers;
+
 
 namespace PizzaApi.Controllers
 {
@@ -42,7 +44,13 @@ namespace PizzaApi.Controllers
         [HttpPost("Add Custom to Order")]
         public IActionResult PostBody([FromBody] Pizza order) => Post(order);
 
-        [HttpPost("Add Default to Order")]
+        //[HttpPost("Add Default to Order")]
+        //public IActionResult Post(string name)
+        //{
+            
+        //    orders.PizzaAddToOrder(order);
+        //    return CreatedAtAction(nameof(Get), new { Name = order.Name }, order);
+        //}
 
 
     }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PizzaApi.Models;
+using DataBaseFunc.Models;
 using System.Xml.Linq;
 using System.Threading.Tasks;
 
@@ -16,7 +16,7 @@ namespace PizzaApi.Controllers
         //}
 
 
-        private static List<Pizza> pizzas = new()
+        public static List<Pizza> pizzas = new()
         {
             new Pizza(){ PizzaPrice =18, rating=0, Name="Margarita",PizzaIngredients={Ingredient.Cheese, Ingredient.Tomato}},
             new Pizza(){ PizzaPrice =26, rating=0, Name="Peperoni",PizzaIngredients={ Ingredient.Onion,Ingredient.Cheese, Ingredient.Tomato, Ingredient.Peperoni}},
