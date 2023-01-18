@@ -3,15 +3,15 @@
     public class Pizza
     {
 
-        public double PizzaPrice { get; set; }/* = Ingredient.Dough.Price*/
-        public int rating = 0;
-        public string Name = "Custom pizza";
+        public double PizzaPrice { get; set; } = Ingredient.Dough.Price;
+        public int rating { get; set; } = 0;
+        public string Name { get; set; } = "Custom pizza";
 
 
-       //public List<Ingredient> PizzaIngredients = new List<Ingredient>()
-       //{
-       //      Ingredient.Dough
-       //};
+        public List<Ingredient> PizzaIngredients { get; set; } = new List<Ingredient>()
+        {
+              Ingredient.Dough
+        };
 
         //public Pizza(List<Ingredient> pizzaIngredients, string name)
         //{
@@ -31,21 +31,21 @@
 
         //}
 
-        //public void AddIngredient(Ingredient ingredient)
-        //{
+        public void AddIngredient(Ingredient ingredient)
+        {
 
-        //    this.PizzaIngredients.Add(ingredient);
-        //    this.PizzaPrice += ingredient.Price;
-        //}
+            this.PizzaIngredients.Add(ingredient);
+            this.PizzaPrice += ingredient.Price;
+        }
 
-        //public bool RemoveIngredient(Ingredient ingredient)
-        //{
-        //    this.PizzaPrice -= ingredient.Price;
-        //    return this.PizzaIngredients.Remove(ingredient);
-        //    //this.PizzaIngredients.Remove(ingredient);
-        //    //this.PizzaPrice -= ingredient.Price;
-        //    //return this.PizzaPrice;
-        //}
+        public bool RemoveIngredient(Ingredient ingredient)
+        {
+            this.PizzaPrice -= ingredient.Price;
+            return this.PizzaIngredients.Remove(ingredient);
+            //this.PizzaIngredients.Remove(ingredient);
+            //this.PizzaPrice -= ingredient.Price;
+            //return this.PizzaPrice;
+        }
 
 
     }
