@@ -8,7 +8,7 @@
         //static public Pizza Mozarella = new Pizza(new List<Ingredient>() { Ingredient.Mozarella, Ingredient.Tomato, Ingredient.Peperoni }, "Mozarella");
         //static public Pizza Vegetarian = new Pizza(new List<Ingredient>() { Ingredient.Tomato, Ingredient.Olives, Ingredient.Salad }, "Vegetarian");
 
-        public List<Pizza> PizzaMenu = new List<Pizza>() { Margarita, Peperoni, Mozarella, Vegetarian };
+        public List<Pizza> PizzaMenu = new List<Pizza>();
 
         public Pizza GetPizza(string name)
         {
