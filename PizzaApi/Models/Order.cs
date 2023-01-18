@@ -2,8 +2,9 @@
 {
     public class Order
     {
-        public List<Pizza> orders = new List<Pizza>();
-        public double price = 0;
+        public List<Pizza> orders { get; set; } = new List<Pizza>() ;
+      
+        public double price { get; set; } = 0;
         //add
         public void PizzaAddToOrder(Pizza pizza)
         {

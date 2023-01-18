@@ -2,6 +2,8 @@
 using PizzaApi.Models;
 using System.Xml.Linq;
 using System.Threading.Tasks;
+
+
 namespace PizzaApi.Controllers
 {
     [Route("api/[controller]")]
@@ -50,6 +52,22 @@ namespace PizzaApi.Controllers
             }
             return Ok(pizza);
         }
+        
+        [HttpDelete("{name}")]
+        public IActionResult Delete(string name)
+        {
+            var pizza = pizzas.SingleOrDefault(p => p.Name == name);
 
+            if (pizza == null)
+            {
+                return NotFound();
+            }
+            pizzas.Remove(pizza);
+            return Ok();
+        }
+
+    
+
+        //private string NextPizzaName => 
     }
 }
