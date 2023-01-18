@@ -27,7 +27,15 @@ namespace DataBaseFunc
         {
 
             modelBuilder.Entity<Bucket>().HasNoKey();
-            
+            modelBuilder.Entity<Pizza>()
+                .HasMany<Ingredient>(p => p.PizzaIngredients)
+                .WithMany(i => i.Pizzas)
+                .UsingEntity(pi =>
+                {
+                    pi.HasKey("PizzaId");
+                    pi.HasKey("IngId");
+                    pi.ToTable("PizzaIng");
+                });
 
             modelBuilder.Entity<Ingredient>().HasData(
                     new Ingredient() { Name = "Dough", Price = 10 },
