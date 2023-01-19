@@ -17,47 +17,36 @@ namespace DataBaseFunc
         public DbSet<Pizza> Pizza { get; set; } = null!;
 
         public DbSet<Ingredient> Ingredients { get; set; } = null!;
+        public DbSet<PizzaIngridient> PizzaIngridients { get; set; } = null!;
 
         public PizzaContext(DbContextOptions context) : base(context)
         {
-            
+            Database.EnsureDeleted();
+            Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             modelBuilder.Entity<Bucket>().HasNoKey();
-            modelBuilder.Entity<Pizza>()
-                .HasMany<Ingredient>(p => p.PizzaIngredients)
-                .WithMany(i => i.Pizzas)
-                .UsingEntity(pi =>
-                {
-                    pi.HasKey("PizzaId");
-                    pi.HasKey("IngId");
-                    pi.ToTable("PizzaIng");
-                });
-
-            modelBuilder.Entity<Ingredient>().HasData(
-                    new Ingredient() { Name = "Dough", Price = 10 },
-                    new Ingredient() { Name = "Peperoni", Price = 1 },
-                    new Ingredient() { Name = "Onion", Price = 2 },
-                    new Ingredient() { Name = "Cheese", Price = 3 },
-                    new Ingredient() { Name = "Tomato", Price = 5 },
-                    new Ingredient() { Name = "Mushrooms", Price = 7 },
-                    new Ingredient() { Name = "Mozarella", Price = 15 },
-                    new Ingredient() { Name = "Peper", Price = 12 },
-                    new Ingredient() { Name = "Salad", Price = 17 },
-                    new Ingredient() { Name = "Salmon", Price = 17 },
-                    new Ingredient() { Name = "Olives", Price = 12 }
-                    );
-
-            modelBuilder.Entity<Pizza>().HasData(
-                        new Pizza() { PizzaPrice = 18, Name = "Margarita", PizzaIngredients = { new Ingredient() { Name = "Tomato", Price = 5 }, new Ingredient() { Name = "Cheese", Price = 3 }, } },
-                        new Pizza() { PizzaPrice = 26, rating = 0, Name = "Peperoni", PizzaIngredients = { new Ingredient() { Name = "Onion", Price = 2 }, new Ingredient() { Name = "Peperoni", Price = 1 }, new Ingredient() {  Name = "Tomato", Price = 5 }, new Ingredient() { Name = "Cheese", Price = 3 } } },
-                        new Pizza() { PizzaPrice = 31, rating = 0, Name = "Mushroom", PizzaIngredients = { new Ingredient() { Name = "Mushrooms", Price = 7 }, new Ingredient() { Name = "Onion", Price = 2 }, new Ingredient() { Name = "Peperoni", Price = 1 }, new Ingredient() { Name = "Tomato", Price = 5 }, new Ingredient() { Name = "Cheese", Price = 3 } } },
-                        new Pizza() { PizzaPrice = 39, rating = 0, Name = "Mozarella", PizzaIngredients = { new Ingredient() { Name = "Mozarella", Price = 15 }, new Ingredient() { Name = "Onion", Price = 2 }, new Ingredient() { Name = "Peperoni", Price = 1 }, new Ingredient() { Name = "Tomato", Price = 5 }, new Ingredient() { Name = "Cheese", Price = 3 } } },
-                        new Pizza() { PizzaPrice = 34, rating = 0, Name = "Vegitariana", PizzaIngredients = { new Ingredient() { Name = "Onion", Price = 2 }, new Ingredient() { Name = "Tomato", Price = 5 }, new Ingredient() { Name = "Mushrooms", Price = 7 } } }
-                        );
+            modelBuilder
+            .Entity<Pizza>()
+            .HasMany(p => p.Ingredients)
+            .WithMany(i => i.Pizzas)
+            .UsingEntity<PizzaIngridient>(
+               j => j
+                .HasOne(pi => pi.Ingredient)
+                .WithMany(t => t.PizzaIngridients)
+                .HasForeignKey(pi => pi.IngName).OnDelete(DeleteBehavior.Restrict),
+            j => j
+                .HasOne(pi => pi.Pizza)
+                .WithMany(p => p.PizzaIngridients)
+                .HasForeignKey(pi => pi.PizzaName).OnDelete(DeleteBehavior.Restrict),
+            j =>
+            {
+                j.HasKey(t => new { t.PizzaName, t.IngName });
+                j.ToTable("PizzaIngridient");
+            });
             
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

@@ -14,6 +14,7 @@ namespace DataBaseFunc.Models
         [Key]
         public string Name { get; set; } = null!;
         public double Price { get; set; }
+        public List<PizzaIngridient>? PizzaIngridients { get; set; } = new();
         public List<Pizza> Pizzas { get; set; } = new();
     }
 }

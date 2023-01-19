@@ -17,13 +17,14 @@ namespace DataBaseFunc.Models
         [Key]
         public string Name { get; set; } = "Custom pizza";
 
-        
-        public List<Ingredient> PizzaIngredients { get; set; } = new List<Ingredient>()
-        {
-              new Ingredient () {Name = "Dough", Price = 10}
-        };
+        public List<PizzaIngridient> PizzaIngridients { get; set; } = new();
 
-        
+        public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
+        //{
+        //      new Ingredient () {Name = "Dough", Price = 10}
+        //};
+
+
 
         //public void AddIngredient(Ingredient ingredient)
         //{
