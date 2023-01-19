@@ -20,29 +20,6 @@ namespace DataBaseFunc.Models
         public List<PizzaIngridient> PizzaIngridients { get; set; } = new();
 
         public List<Ingredient> Ingredients { get; set; } = new List<Ingredient>();
-        //{
-        //      new Ingredient () {Name = "Dough", Price = 10}
-        //};
-
-
-
-        //public void AddIngredient(Ingredient ingredient)
-        //{
-
-        //    this.PizzaIngredients.Add(ingredient);
-        //    this.PizzaPrice += ingredient.Price;
-        //}
-
-        //public bool RemoveIngredient(Ingredient ingredient)
-        //{
-        //    this.PizzaPrice -= ingredient.Price;
-        //    return this.PizzaIngredients.Remove(ingredient);
-        //    //this.PizzaIngredients.Remove(ingredient);
-        //    //this.PizzaPrice -= ingredient.Price;
-        //    //return this.PizzaPrice;
-        //}
-
-
     }
 
 }

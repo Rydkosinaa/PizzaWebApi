@@ -2,46 +2,26 @@
 using DataBaseFunc.Models;
 using System.Xml.Linq;
 using System.Threading.Tasks;
-
+using static DataBaseFunc.Commands;
+using Microsoft.EntityFrameworkCore;
+using DataBaseFunc;
 
 namespace PizzaApi.Controllers
 {
     [Route("api/[controller]")]
     public class PizzaController : Controller
     {
+        static readonly DbContextOptionsBuilder builder = new DbContextOptionsBuilder<PizzaContext>();
+        static readonly DbContextOptions option = builder.Options;
+        public static List<Pizza> pizzas = GetMenu(option);
+        public static List<Ingredient> ingredients = GetIngredients(option);
 
-        //public IActionResult Index()
-        //{
-        //    return View();
-        //}
-
-
-        public static List<Pizza> pizzas = new()
-        {
-            new Pizza(){ PizzaPrice =18, rating=0, Name="Margarita",PizzaIngredients={Ingredient.Cheese, Ingredient.Tomato}},
-            new Pizza(){ PizzaPrice =26, rating=0, Name="Peperoni",PizzaIngredients={ Ingredient.Onion,Ingredient.Cheese, Ingredient.Tomato, Ingredient.Peperoni}},
-            new Pizza(){ PizzaPrice =31, rating=0, Name="Mushroom",PizzaIngredients={ Ingredient.Mushrooms, Ingredient.Onion,Ingredient.Cheese, Ingredient.Tomato, Ingredient.Peperoni }},
-            new Pizza(){ PizzaPrice =39, rating=0, Name="Mozarella",PizzaIngredients={ Ingredient.Mozarella, Ingredient.Onion,Ingredient.Cheese, Ingredient.Tomato, Ingredient.Peperoni}},
-            new Pizza(){ PizzaPrice =34, rating=0, Name="Vegitariana",PizzaIngredients={ Ingredient.Mushrooms, Ingredient.Onion, Ingredient.Tomato}},
-
-        };
-        //    private static List<Ingredient> ingredients = new()
-        //    {
-        //    new Ingredient() {Name="Dough",Price= 10},
-        //     new Ingredient() {Name="Peperoni", Price=1},
-        //    new Ingredient() {Name="Onion", Price=2},
-        //     new Ingredient() {Name="Cheese",Price= 3 },
-        //    new Ingredient() {Name="Tomato", Price=5},
-        //    new Ingredient() {Name="Mozarella", Price=15 },
-        //    new Ingredient() {Name="Peper", Price=12},
-        //    new Ingredient() {Name="Salad", Price=17 },
-        //    new Ingredient(){Name="Salmon",Price= 17},
-        //    new Ingredient(){Name="Olives",Price= 12 }
-        //};
 
         [HttpGet]
-        //public IEnumerable<Ingredient> Get() =>ingredients;
         public IEnumerable<Pizza> Get() => pizzas;
+
+
+
         [HttpGet("{name}")]
         public IActionResult Get(string name)
         {
@@ -53,6 +33,10 @@ namespace PizzaApi.Controllers
             return Ok(pizza);
         }
         
+
+
+
+
         [HttpDelete("{name}")]
         public IActionResult Delete(string name)
         {
@@ -66,8 +50,18 @@ namespace PizzaApi.Controllers
             return Ok();
         }
 
-    
 
-        //private string NextPizzaName => 
+        [HttpGet("Sort")]
+        public IEnumerable<Pizza> Sort()
+        {
+            var sortPizza = pizzas;
+            sortPizza.Sort((p1, p2) => p1.rating.CompareTo(p2.rating));
+            sortPizza.Reverse();
+            return sortPizza;
+        }
+
+
+        [HttpGet("Ingredients")]
+        public IEnumerable<Ingredient> Ingredients() => ingredients;
     }
 }

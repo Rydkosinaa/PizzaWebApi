@@ -11,7 +11,7 @@ using static System.Collections.Specialized.BitVector32;
 
 namespace DataBaseFunc
 {
-    internal class PizzaContext : DbContext
+    public class PizzaContext : DbContext
     {
         public DbSet<Bucket>? Bucket { get; set; }
         public DbSet<Pizza> Pizza { get; set; } = null!;
@@ -21,14 +21,16 @@ namespace DataBaseFunc
 
         public PizzaContext(DbContextOptions context) : base(context)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+            ////Database.EnsureDeleted();
+            ////Database.EnsureCreated();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
             modelBuilder.Entity<Bucket>().HasNoKey();
+
+
             modelBuilder
             .Entity<Pizza>()
             .HasMany(p => p.Ingredients)
@@ -47,7 +49,6 @@ namespace DataBaseFunc
                 j.HasKey(t => new { t.PizzaName, t.IngName });
                 j.ToTable("PizzaIngridient");
             });
-            
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

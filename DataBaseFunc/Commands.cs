@@ -67,5 +67,32 @@ namespace DataBaseFunc
 
             commands.SaveChanges();
         }
+
+        static public List<Pizza> GetMenu(DbContextOptions context)
+        {
+            using PizzaContext commands = new(context);
+            var nomenu = commands.Pizza.Where(p => EF.Functions.Like(p.Name!, "Custom pizza%")).ToList();
+            var allpizza = commands.Pizza.ToList();
+            var menu = allpizza.Except(nomenu).ToList();
+
+            return menu;
+        }
+
+        static public void SetRating(DbContextOptions context, string Name)
+        {
+            using PizzaContext commands = new(context);
+            commands.Pizza.FirstOrDefault(p => p.Name == Name).rating++;
+            commands.SaveChanges();
+
+        }
+
+        static public List<Ingredient> GetIngredients(DbContextOptions context)
+        {
+            using PizzaContext commands = new(context);
+        
+            var ingList = commands.Ingredients.ToList();
+
+            return ingList;
+        }
     }
 }
