@@ -27,8 +27,8 @@ namespace PizzaApi.Controllers
         public Bucket Get() => bucket;
 
 
-        private string NextPizzaName => "Custom Pizza " + Convert.ToString(bucket.Orders.Where(o => o.Name.Substring(0, 12).Equals("Custom Pizza")).Count() 
-                                                                           == 0 ? 1 : bucket.Orders.Where(o => o.Name.Substring(0, 12).Equals("Custom Pizza")).Count() + 1);
+        private string NextPizzaName => "Custom Pizza " + Convert.ToString(bucket.Orders.Where(o => o.Name.Substring(0, 6).Equals("Custom")).Count() 
+                                                                           == 0 ? 1 : bucket.Orders.Where(o => o.Name.Substring(0, 6).Equals("Custom")).Count() + 1);
 
         [HttpGet("GetNextName")]
         public string GetNextName()
@@ -39,7 +39,7 @@ namespace PizzaApi.Controllers
 
 
 
-        [HttpPost("Add real Pizza to bucket")]
+        [HttpPost("AddRealPizzaToBucket{Name}")]
         public IActionResult Post(string Name)
         {
             var pizza = pizzas.FirstOrDefault(p => p.Name == Name);
@@ -54,7 +54,7 @@ namespace PizzaApi.Controllers
         }
 
 
-        [HttpPost("Add Custom to Order")]
+        [HttpPost("AddCustomToOrder")]
         public IActionResult Custom(List<string> IngredientName)
         {
 
@@ -76,7 +76,7 @@ namespace PizzaApi.Controllers
             return CreatedAtAction(nameof(Get), new { Name = pizza.Name }, pizza);
         }
 
-        [HttpPost("Add ingredient to pizza in bucket")]
+        [HttpPost("AddIngredientToPizzaInBucket{pizzaName}")]
         public IActionResult AddIng(List<string> IngredientName, string pizzaName)
         {
 
@@ -102,7 +102,7 @@ namespace PizzaApi.Controllers
         }
 
 
-        [HttpDelete("Delete pizza from bucket")]
+        [HttpDelete("DeletePizzaFromBucket{pizzaName}")]
         public IActionResult Del(string pizzaName)
         {
             if (bucket.Orders.FirstOrDefault(b => b.Name == pizzaName)?.Name != null)
@@ -116,7 +116,7 @@ namespace PizzaApi.Controllers
         }
 
 
-        [HttpDelete("Delete ingredient from pizza in bucket")]
+        [HttpDelete("DeleteIngredientFromPizzaInBucket{pizzaName}")]
         public IActionResult DelIng(List<string> IngredientName, string pizzaName)
         {
             if (bucket.Orders.FirstOrDefault(p => p.Name == pizzaName)?.Name != null)
